@@ -1,0 +1,20 @@
+{
+    "name": "nihar-das/oop",
+    "description": "This is a basic php mvc framework",
+    "autoload": {
+        "psr-4": {
+            "Bluesky\\": "src/"
+        },
+        "files": ["src/Helpers/functions.php"]
+    },
+    "authors": [
+        {
+            "name": "Nihar Ranjan Das",
+            "email": "niharranjandasmu@gmail.com"
+        }
+    ],
+    "require": {
+        "larapack/dd": "^1.1",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
