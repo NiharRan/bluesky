@@ -4,17 +4,12 @@ namespace Bluesky\Models;
 
 use Bluesky\Core\Orm\Model;
 
-class User extends Model
+class Post extends Model
 {
     protected array $fillable = [
-        'name', 'email', 'phone', 'username'
+        'title', 'slug', 'content', 'category_id', 'user_id', 'status'
     ];
+    
     protected string $table = 'users';
     protected string $primaryKey = 'id';
-
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'user_id', 'id');
-    }
 }

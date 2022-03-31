@@ -4,8 +4,8 @@ namespace Bluesky\Core\Facades;
 
 class Facade
 {
-    public static function resolveFacade($name)
+    public static function resolveFacade($name, $param = null)
     {
-        return app($name);
+        return app($name, $param);
     }
 }

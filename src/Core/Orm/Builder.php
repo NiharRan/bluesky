@@ -1,28 +1,48 @@
 <?php
 
-namespace Bluesky\Core\Traits;
+namespace Bluesky\Core\Orm;
 
-use Bluesky\Core\Model;
+use Bluesky\Core\Orm\Traits\ModelBuilderHelper;
 use Closure;
 
-/**
- * 
- */
-trait ModelBuilder
+class Builder 
 {
+    use ModelBuilderHelper;
+
+    protected array $whereBlocks;
+    protected array $selects;
+    protected array $with;
+    protected string $sqlQuery;
+    protected string $table;
+    protected array $fillable;
+    protected string $primaryKey;
+    protected $model;
+
+    public function __construct()
+    {
+        $this->whereBlocks = [];
+        $this->sqlQuery = '';
+        $this->table = '';
+        $this->fillable = [];
+        $this->primaryKey = 'id';
+        $this->selects = [];
+        $this->with = [];
+        $this->model = null;
+    }
+
     public function select(...$fields)
     {
         $this->selects = array_merge($this->selects, $fields);
         return $this;
     }
 
-    public function where(...$params): Model
+    public function where(...$params)
     {
         $size = count($params);
-       if ($size > 1 && $size < 4) {
-           $this->generateField($params);
-           return $this;
-       }
+        if ($size > 1 && $size < 4) {
+            $this->generateField($params);
+            return $this;
+        }
 
         $params = $params[0];
         if (is_array($params)) {
@@ -50,13 +70,13 @@ trait ModelBuilder
         return $this;
     }
 
-    public function orWhere(...$params): Model
+    public function orWhere(...$params)
     {
         $size = count($params);
-       if ($size > 1 && $size < 4) {
-           $this->generateField($params, 'OR');
-           return $this;
-       }
+        if ($size > 1 && $size < 4) {
+            $this->generateField($params, 'OR');
+            return $this;
+        }
 
         $params = $params[0];
         if (is_array($params)) {
@@ -98,5 +118,10 @@ trait ModelBuilder
     {
         $this->buildQuery();
         return $this;
+    }
+
+    public function __set($name, $value)
+    {
+        $this->{$name} = $value;
     }
 }

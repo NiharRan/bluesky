@@ -2,6 +2,7 @@
 
 namespace Bluesky\Core;
 
+use Bluesky\Core\Orm\Builder;
 use Bluesky\Core\Routes\Router;
 
 class Application
@@ -12,7 +13,7 @@ class Application
     public Controller $controller;
     public Response $response;
     public Request $request;
-    public Model $model;
+    public Builder $builder;
 
     public function __construct()
     {
@@ -21,7 +22,7 @@ class Application
         $this->controller = new Controller();
         $this->response = new Response();
         $this->request = new Request();
-        $this->model = new Model();
+        $this->builder = new Builder();
     }
 
     public static function init()

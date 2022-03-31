@@ -1,8 +1,6 @@
 <?php
 
-namespace Bluesky\Core\Traits;
-
-use Bluesky\Core\Facades\Model;
+namespace Bluesky\Core\Orm\Traits;
 
 trait ModelBuilderHelper
 {
@@ -48,14 +46,14 @@ trait ModelBuilderHelper
                 $this->sqlQuery .= " " . $block[3];
             } else {
                 if ($key == 0) {
-                    $this->sqlQuery .= " " . $block[1] . " " . strtoupper($block[2]) . "'" . $block[3] . "'";
+                    $this->sqlQuery .= " " . $block[1] . " " . strtoupper($block[2]) . " '" . $block[3] . "'";
                 } else {
                     $subBlock = " " . $block[0];
                     if ($subBlockStarts) {
                         $subBlock = "";
                         $subBlockStarts = false;
                     }
-                    $this->sqlQuery .= $subBlock . " " . $block[1] . " " . strtoupper($block[2]) . "'" . $block[3] . "'";
+                    $this->sqlQuery .= $subBlock . " " . $block[1] . " " . strtoupper($block[2]) . " '" . $block[3] . "'";
                 }
             }
         }
